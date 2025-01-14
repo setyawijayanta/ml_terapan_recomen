@@ -441,3 +441,18 @@ y_pred_i = nilai prediksi terhadap i
       - `val_root_mean_squared_error` : 0.3493
      
    **Model dapat memberikan rekomendasi secara Collaborative Filtering dengan cukup baik.**
+
+## 7. Kesimpulan
+
+Dengan begitu, dapat disimpulkan bahwa sistem berhasil melakukan rekomendasi baik dengan pendekatan _content-based filtering_ maupun _collaborative filtering_. _Collaborative filtering_ membutuhkan data penilaian tempat dari pengguna, sedangkan pada _content-based filtering_, data rating tidak dibutuhkan karena sistem akan merekomendasikan berdasarkan konten tempat tersebut, yaitu kategori. 
+
+## 8. Referensi
+
+[1] Kementerian Pariwisata dan Ekonomi Kreatif, 2022.
+
+[2] Muchamad Sulton Irwinsyah, 2019; Universitas Islam Sultan Agung, 2017
+
+[3] Jurnal Sistem Informasi (2024). Penerapan Content-Based Filtering untuk sistem rekomendasi komik menggunakan TF-IDF dan cosine similarity.
+
+[4] Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination
+
