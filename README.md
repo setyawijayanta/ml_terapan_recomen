@@ -376,6 +376,7 @@ Berikut ini adalah penjelasan mengenai setiap metrik beserta hasil perhitungan m
 _rumus menggunakan gambar karena terdapat kendala dalam menggunakan latex formula_
 
 Di mana:
+
       TP = True Positive (rekomendasi yang sesuai)
       FP = False Positive (rekomendasi yang tidak sesuai)
 
