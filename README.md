@@ -372,3 +372,41 @@ Berikut ini adalah penjelasan mengenai setiap metrik beserta hasil perhitungan m
     - **Formula**
 
        ![gambar_2](https://github.com/user-attachments/assets/fc8d32e3-a801-488d-b6a0-3f66c2907a5c)
+
+Di mana:
+      TP = True Positive (rekomendasi yang sesuai)
+      FP = False Positive (rekomendasi yang tidak sesuai)
+
+
+    - **Cara Kerja**
+
+    $$precision = 5/(5+0) = 100 %$$
+
+    Dengan begitu, diperoleh nilai _precision_ sebesar **100%**.
+      
+    - Penjelasan Hasil `Precision` dari model `Content-Based Learning`
+    - Fungsi dari `calculate_precision` digunakan untuk perhitungan Presisi berdasarkan formula Presisi
+ 
+      ```python
+      # Calculate precision
+      def place_recommendations(place_name, similarity_data=cosine_sim_df, items=places[['Place_Name', 'Category']], k=5):
+        index = similarity_data.loc[:,place_name].to_numpy().argpartition(range(-1, -k, -1))
+        closest = similarity_data.columns[index[-1:-(k+2):-1]]
+        closest = closest.drop(place_name, errors='ignore')
+        return pd.DataFrame(closest).merge(items).head(k)
+      ```
+ 
+      Function utama yang digunakan untuk menghitung skor `Precision` dari model Content-Based Filtering telah berhasil dibuat.
+
+      Berdasarkan hasil rekomendasi tempat wisata dengan pendekatan _content-based filtering_ dapat dilihat bahwa hasil yang diberikan oleh sistem rekomendasi berdasarkan tempat wisata **Pantai Parangtritis** dengan kategori **Bahari**, menghasilkan 5 rekomendasi judul tempat wisata yang tepat. Tetapi secara keseluruhan sistem merekomendasikan tempat wisata dengan tepat.    
+
+    
+- `Colaborative Filtering` : `Root Mean Squared Error`
+  - `Root Mean Squared Error`
+    
+    Root Mean Square Error (RMSE) adalah metrik yang sering digunakan dalam machine learning untuk mengukur seberapa baik sebuah model prediktif dapat memperkirakan nilai yang sebenarnya. RMSE merupakan akar kuadrat dari rata-rata perbedaan kuadrat antara nilai yang diprediksi oleh model dan nilai yang sebenarnya (nilai aktual).
+
+    Berikut ini adalah formula dan cara kerja dari `Root Mean Squared Error` :
+
+    - **Formula**
+   
