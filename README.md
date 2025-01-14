@@ -416,6 +416,8 @@ Berdasarkan hasil rekomendasi tempat wisata dengan pendekatan _content-based fil
 
    ![gambar_3](https://github.com/user-attachments/assets/8323ec31-9925-41c3-95a7-1a1f08210a3f)
 
+_rumus menggunakan gambar karena terdapat kendala dalam menggunakan latex formula_
+
 Dimana:
 
 n = jumlah dataset
