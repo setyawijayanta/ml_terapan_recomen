@@ -165,3 +165,209 @@ Place_Ratings: penilaian atau rating yang diberikan oleh pengguna terhadap tempa
  **Gambar 1. Distribusi Rating Rata-Rata Tempat Wisata**
 
 ![gambar_1](https://github.com/user-attachments/assets/4bdfba23-3e8a-496d-88f8-8d2dacbca9ee)
+
+- **Rating**
+
+  **Tabel 4. Informasi Dataset tourism_rating**
+
+  | #   | Column        | Non-Null Count | Dtype |
+  | --- | ------------- | -------------- | ----- |
+  | 0   | User_Id       | 10000 non-null | int64 |
+  | 1   | Place_Id      | 10000 non-null | int64 |
+  | 2   | Place_Ratings | 10000 non-null | int64 |
+
+  tourism_rating terdiri dari 10000 baris dan 3 kolom sebagai berikut:
+
+  - User_Id: identitas unik dari setiap pengguna.
+  - Place_Id: identitas unik dari setiap tempat wisata.
+  - Place_Ratings: penilaian atau rating yang diberikan oleh pengguna terhadap tempat wisata tertentu.
+
+- **Visualisasi Dataset Ratings**
+
+  Visualisasi data adalah proses representasi grafis dari informasi dan data. Dengan menggunakan elemen visual seperti grafik, diagram, dan peta, visualisasi data menyediakan cara yang intuitif dan mudah diakses untuk melihat dan memahami tren, anomali, dan pola dalam data. Tujuan utama dari visualisasi data adalah untuk mengkomunikasikan informasi secara jelas dan efisien kepada pengguna, sehingga memudahkan pemahaman, analisis, dan pengambilan keputusan berdasarkan data tersebut
+
+  Berikut adalah visualisasi dari dataset tourism_rating:
+
+  **Tabel 5. Sampel Dataset tourism_rating**
+
+  | #   | User_Id | Place_Id | Place_Ratings |
+  | --- | ------- | -------- | ------------- |
+  | 0   | 1       | 179      | 3             |
+  | 1   | 1       | 344      | 2             |
+  | 2   | 1       | 5        | 5             |
+  | 3   | 1       | 373      | 3             |
+  | 4   | 1       | 101      | 4             |
+
+## 4. Data Preparation
+
+Tahap ini bertujuan untuk mempersiapkan data yang akan digunakan untuk proses training model. Di sini dilakukan penghapusan kolom yang tidak diperlukan, pembersihkan data _missing value_, dan melakukan pengecekan dan penghapusan data duplikat.
+
+a. **Data Preparation Content-Based Filtering**
+  Tahap data preparation merupakan proses transformasi data menjadi bentuk yang dapat diterima oleh model machine learning nanti. Proses data preparation yang dilakukan, yaitu membersihkan data missing value, dan melakukan penghapusan data duplikat.
+
+1) Menghapus Kolom yang Tidak Diperlukan
+  Hanya kolom Place_Id, Place_Name, dan Category yang dipertahankan. Kolom lain yang tidak relevan dihapus.
+
+2) Handle Missing Values
+_Missing Value_ terjadi ketika variabel atau barus tertentu kekurangan titik data, sehingga menghasilkan informasi yang tidak lengkap. Nilai yang hilang dapat ditangani dengan berbagai cara seperti imputasi (mengisi nilai yang hilang dengan mean, median, modus, dll), atau penghapusan (menghilangkan baris atau kolom yang nilai hilang)
+
+  Tidak ditemukan data hilang dalam dataset tourism_with_id.
+
+3) Menghapus Data Duplikat
+  Data duplikat adalah baris data yang sama persis untuk setiap variabel yang ada. Dataset yang digunakan perlu diperiksa juga apakah dataset memiliki data yang sama atau data duplikat. Jika ada, maka data tersebut harus ditangani dengan menghapus data duplikat tersebut.
+  Data duplikat dihapus berdasarkan kombinasi kolom Place_Id dan Place_Name untuk memastikan keunikan data.
+  Jumlah data places yang duplikat: 0
+  Jumlah data rating yang duplikat: 79
+
+  Berdasarkan hasil tersebut, ditemukan adanya data duplikat pada data rating, sehingga perlu dilakukan penghapusan data duplikat.
+
+4) Dataset Ratings
+  Pengecekan informasi variabel dari dataset ratings berupa jumlah kolom, nama kolom, jumlah data per kolom dan tipe datanya.
+
+5) Menggunakan TF-IDF Vectorizer
+   TF-IDF (Term Frequency-Inverse Document Frequency) adalah metode pemrosesan data yang dilakukan untuk mengukur pentingnya sebuah kata dalam sebuah dokumen relatif terhadap kumpulan dokumen lainnya. TF-IDF Vectorizer digunakan untuk menemukan representasi fitur yang penting dari setiap kategori destinasi wisata. Alat ini dari library scikit-learn akan mengubah nilai-nilai tersebut menjadi vektor dengan menggunakan metode fit_transform dan transform, serta melakukan pemecahan data menjadi bagian-bagian yang lebih kecil secara langsung.
+
+
+b. **Data Preparation Collaborative Filtering**
+
+1) Encoding Fitur
+
+  Fitur User_Id dan Place_Id pada dataset tourism_rating diencoding menjadi array agar dapat diproses oleh model machine learning.
+
+2) Melakukan mapping atau pemetaan kolom user dan place ke dataset ratings yang berkaitan.
+
+3) Melakukan pengecekan jumlah user, jumlah tempat, penilaian minimal, dan penilaian maksimal.
+
+4) Mengacak dataset ratings, pengacakan data dilakukan untuk menghindari adanya bias dalam proses pembelajaran model.
+
+5) Normalisasi dataset ratings, normalisasi rating dilakukan untuk memastikan semua nilai berada dalam rentang tertentu.
+    
+6) Membagi dataset menjadi data train dan data test, yaitu sebesar 20% data uji dan 80% data latih.
+
+
+## 5. Modeling and Result
+
+Pada tahap pengembangan model _machine learning_ sistem rekomendasi, teknik _content-based filtering recommendation_ dan _collaborative filtering recommendation_ digunakan untuk memberikan rekomendasi tempat terbaik kepada pengguna berdasarkan rating atau penilaian yang telah mereka berikan pada tempat tersebut. Tujuannya adalah untuk memberikan hasil rekomendasi yang tepat sesuai dengan keinginan pengguna.
+
+a. **Content-based Filtering Recommendation**
+
+Beberapa tahap yang dilakukan untuk membuat sistem rekomendasi dengan pendekatan _content-based filtering_ adalah _cosine similarity_, dan pengujian sistem rekomendasi.
+
+### Tahapan Model Content-based Filtering Recommendation
+
+- Cosine Similarity
+
+  Cosine similarity digunakan untuk menghitung tingkat kesamaan antara dua data place dengan mengukur sudut antara kedua data tersebut. Teknik ini menghitung tingkat kesamaan dengan menggunakan sudut antara data place yang dianalisis. Hasil perhitungan ini akan memberikan nilai yang menunjukkan tingkat kesamaan antara dua data place, dimana nilai yang mendekati 1 menunjukkan tingkat kesamaan yang tinggi, dan nilai yang mendekati 0 menunjukkan tingkat kesamaan yang rendah. Tahapan dalam cosine similarity adalah sebagai berikut :
+
+  - Melakukan perhitungan derajat kesamaan atau similatiry degree antar nama tempat wisata dengan teknik cosine similarity menggunakan library scikit-learn.
+  
+  - Mengubah matriks cosine similarity menjadi bentuk dataframe antar nama tempat (destinasi wisata).
+
+  - Melakukan pendefinisian fungsi place_recommendations untuk menampilkan hasil rekomendasi tempat berdasarkan kesamaan kategori dari sebuah tempat.
+
+  - Hasil _Top-N Recommendation_
+
+  Setelah data tempat wisata dikonversi menjadi matriks dengan menggunakan TF-IDF Vectorizer, dan tingkat kesamaan antar nama tempat ditentukan dengan menggunakan cosine similarity, selanjutnya dilakukan pengujian terhadap sistem rekomendasi yang menggunakan pendekatan content-based filtering recommendation. Hasil pengujian tersebut dapat dilihat sebagai berikut:
+
+  Diambil sebuah nama tempat yang dipilih oleh pengguna.
+
+  **Tabel 6. Nama Tempat yang Dipilih Pengguna**
+
+|   # | Place_Id | Place_Name          | Category |
+|----:|---------:|---------------------|----------|
+| 176 | 177      | Pantai Parangtritis | Bahari   |
+
+  Berikut adalah hasil rekomendasi nama tempat berdasarkan kategori yang sama.
+
+  **Tabel 7. Hasil Rekomendasi _Content-based Filtering_**
+
+| # |         Place_Name | Category |
+|--:|-------------------:|---------:|
+| 0 | Pantai Pok Tunggal |   Bahari |
+| 1 |       Pantai Drini |   Bahari |
+| 2 |    Pantai Sadranan |   Bahari |
+| 3 |       Pantai Samas |   Bahari |
+| 4 |    Pantai Nguluran |   Bahari |
+
+  Berdasarkan hasil rekomendasi di atas, dapat dilihat bahwa sistem yang dibuat berhasil memberikan rekomendasi tempat berdasarkan sebuah tempat, yaitu 'Pantai Parangtritis' dan dihasilkan rekomendasi tempat dengan kategori yang sama, yaitu bahari.
+
+b. **Model dengan Collaborative Filtering**
+
+Collaborative Filtering adalah teknik merekomendasikan item yang mirip dengan preferensi pengguna yang sama di masa lalu, misalnya berdasarkan penilaian tempat yang telah diberikan oleh seorang pengguna. Sistem akan merekomendasikan tempat berdasarkan riwayat penilaian pengguna tersebut terhadap tempat dan kategorinya.
+
+### Tahapan Model Collaborative Filtering 
+Tahap-tahap yang dilakukan untuk membuat sistem rekomendasi dengan pendekatan _collaborative filtering_ meliputi : Melakukan pendefinisian kelas RecommenderNet untuk membangun model klasifikasi teks tersebut. 
+RecommenderNet adalah model sistem rekomendasi berbasis Collaborative Filtering yang dirancang menggunakan arsitektur berbasis layer embedding. Model RecommenderNet menggunakan Embedding Layer untuk menghasilkan representasi tersembunyi pengguna dan tempat wisata. Representasi ini membantu model memahami pola hubungan antara pengguna dan tempat yang mungkin tidak langsung terlihat. Kombinasi embedding, bias, dan operasi dot product memungkinkan model memprediksi kecocokan (rating) dengan akurat.
+Model ini akan memberikan rekomendasi kepada pengguna berdasarkan preferensi atau kecenderungan pengguna di masa lalu. RecommenderNet menggunakan algoritma pembelajaran mesin seperti collaborative filtering atau content-based filtering untuk menentukan rekomendasi yang tepat untuk pengguna.
+
+Model dibangun dengan layer berikut:
+- Embedding Layer
+Fungsi: Layer ini mengubah input ID (user dan place) menjadi representasi vektor berdimensi tetap (embedding). Representasi ini memungkinkan model memahami hubungan tersembunyi antara pengguna dan tempat wisata.
+- Bias Embedding
+Fungsi: Layer ini menambahkan bias khusus untuk setiap pengguna dan tempat.
+
+Parameter yang digunakan dalam model ini adalah:
+
+users_count: jumlah user yang akan jadi input dimension pada user embedding, tepatnya sebagai jumlah elemen dari vocabulary atau kata-kata yang digunakan dalam input data
+place_count: jumlah tempat yang akan jadi input dimension pada tempat embedding, tepatnya sebagai jumlah elemen dari vocabulary atau kata-kata yang digunakan dalam input data
+embedding_size: ukuran embedding akan jadi output dimension pada user embedding dan tempat embedding, yaitu jumlah fitur yang dihasilkan oleh Embedding layer, yang merupakan hasil pengurangan dimensi dari input data.
+Embedding layer ini akan mengubah representasi numerik dari input data menjadi representasi vektor yang lebih bermakna dan dapat dipahami oleh model machine learning.
+
+#### Selanjutnya dilakukan proses kompilasi atau compile dengan:
+  - binary crossentropy loss function: loss function untuk menghitung loss pada model klasifikasi biner.
+  - adam optimizer: algoritma optimisasi yang digunakan untuk mengupdate bobot pada model machine learning secara efisien
+  - metrik RMSE (Root Mean Square Error): metrik yang digunakan untuk mengukur seberapa jauh hasil prediksi dari model dari nilai aktual. RMSE dihitung dengan mencari rata-rata dari kuadrat error yang diakumulasikan dari seluruh data.
+
+#### RMSE Formula
+
+Rumus **RMSE (Root Mean Squared Error)** untuk menghitung kesalahan prediksi:
+   Nilai RMSE dari sistem rekomendasi dengan pendekatan _collaborative filtering_ adalah 0.3384 pada _Training RMSE_, dan 0.3512 pada _Validation RMSE_. Sedangkan untuk nilai _training loss_ sebesar 0.6849, dan _validation loss_ sebesar 0.6958.
+   
+#### Menambahkan callback EarlyStopping yang akan menghentikan training jika tidak ada peningkatan selama 5 epochs.
+Epoch memastikan model memiliki cukup waktu untuk belajar pola dalam data secara bertahap.
+
+#### Visualisasi grafik data training dan testing untuk masing-masing metrik Root Mean Square Error dan loss function.
+
+#### Uji Coba
+- Melakukan uji coba atau tes rekomendasi tempat yang diberikan. Namun perlu dikertahui terlebih dahulu untuk variabel khusus orang yang belum pernah mengunjungi tempat tersebut (belum memberikan rating) dengan place_not_rated.
+- Melakukan pengujian prediksi hasil rekomendasi tempat berdasarkan nama tempat dan kategori.
+
+Berdasarkan hasil rekomendasi tempat di atas, dapat dilihat bahwa sistem rekomendasi mengambil pengguna acak , lalu dilakukan pencarian tempat dengan rating terbaik dari user tersebut.
+
+- Taman Lapangan Banteng: Taman Hiburan
+- Wisata Kaliurang: Cagar Alam
+- Taman Buah Surabaya: Taman Hiburan
+- Taman Ekspresi Dan Perpustakaan: Taman Hiburan
+- Monumen Tugu Pahlawan: Budaya
+
+Selanjutnya, sistem akan menampilkan 10 daftar tempat yang direkomendasikan berdasarkan kategori yang dimiliki terhadap data pengguna acak tadi. Dapat dilihat bahwa sistem merekomendasikan beberapa tempat dengan kategori yang sama, seperti
+
+- Kampoeng Rawa: Cagar Alam
+- Masjid Nasional Al-Akbar: Tempat Ibadah
+- Keraton Surabaya: Budaya
+- Monumen Jalesveva Jayamahe: Budaya
+- Atlantis Land Surabaya: Taman Hiburan
+- Taman Mundu: Taman Hiburan
+- Museum Mpu Tantular: Budaya
+- Taman Air Mancur Menari Kenjeran: Taman Hiburan
+- Taman Flora Bratang Surabaya: Taman Hiburan
+- Gereja Perawan Maria Tak Berdosa Surabaya: Tempat Ibadah
+
+## 6. Evaluation
+
+Untuk mengukur bagaimana performa dari model yang telah dibuat, diperlukannya metriks evaluasi untuk mengevaluasi model sistem rekomendasi film. Berikut adalah rincian metrik yang digunakan untuk tiap pendekatan:
+
+- `Content-Based Filtering` : `Precision`
+- `Collaborative Filtering` : `Root Mean Squared Error`
+
+Berikut ini adalah penjelasan mengenai setiap metrik beserta hasil perhitungan metrik dari model yang telah dibuat :
+
+- `Content-Based Filtering` : `Precision`
+  - `Precision`
+  
+    Presisi merupakan ukuran yang menilai efektivitas model klasifikasi dalam mengidentifikasi label positif. Ukuran ini merupakan perbandingan antara jumlah prediksi yang benar-benar positif dengan keseluruhan hasil yang diprediksi sebagai positif, termasuk yang sebenarnya negatif.
+
+    Berikut adalah formula dan cara kerja dari `Precision` :
+    
+    - **Formula**
+      ![gambar_2](https://github.com/user-attachments/assets/fc8d32e3-a801-488d-b6a0-3f66c2907a5c)
