@@ -412,4 +412,6 @@ Di mana:
     Berikut ini adalah formula dan cara kerja dari `Root Mean Squared Error` :
 
     - **Formula**
-   
+
+   ![gambar_3](https://github.com/user-attachments/assets/8323ec31-9925-41c3-95a7-1a1f08210a3f)
+
