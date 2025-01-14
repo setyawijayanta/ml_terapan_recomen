@@ -377,9 +377,9 @@ _rumus menggunakan gambar karena terdapat kendala dalam menggunakan latex formul
 
 Di mana:
 
-      TP = True Positive (rekomendasi yang sesuai)
+TP = True Positive (rekomendasi yang sesuai)
       
-      FP = False Positive (rekomendasi yang tidak sesuai)
+FP = False Positive (rekomendasi yang tidak sesuai)
 
 
 - **Cara Kerja**
