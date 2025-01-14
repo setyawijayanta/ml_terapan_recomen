@@ -162,10 +162,6 @@ Place_Ratings: penilaian atau rating yang diberikan oleh pengguna terhadap tempa
   | 3   | 4        | Taman Mini Indonesia Indah (TMII) | Taman Hiburan |
   | 4   | 5        | Atlantis Water Adventure          | Taman Hiburan |
 
- **Gambar 1. Distribusi Rating Rata-Rata Tempat Wisata**
-
-![gambar_1](https://github.com/user-attachments/assets/4bdfba23-3e8a-496d-88f8-8d2dacbca9ee)
-
 - **Rating**
 
   **Tabel 4. Informasi Dataset tourism_rating**
@@ -197,6 +193,11 @@ Place_Ratings: penilaian atau rating yang diberikan oleh pengguna terhadap tempa
   | 2   | 1       | 5        | 5             |
   | 3   | 1       | 373      | 3             |
   | 4   | 1       | 101      | 4             |
+
+ **Gambar 1. Distribusi Rating Rata-Rata Tempat Wisata**
+
+![gambar_1](https://github.com/user-attachments/assets/4bdfba23-3e8a-496d-88f8-8d2dacbca9ee)
+
 
 ## 4. Data Preparation
 
