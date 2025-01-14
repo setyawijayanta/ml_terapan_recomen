@@ -378,6 +378,7 @@ _rumus menggunakan gambar karena terdapat kendala dalam menggunakan latex formul
 Di mana:
 
       TP = True Positive (rekomendasi yang sesuai)
+      
       FP = False Positive (rekomendasi yang tidak sesuai)
 
 
@@ -418,7 +419,10 @@ Di mana:
 Dimana:
 
 n = jumlah dataset
+
 i = urutan data dalam dataset
+
 y_i = nilai yang sebenarnya
+
 y_pred_i = nilai prediksi terhadap i
 
