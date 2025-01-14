@@ -400,9 +400,9 @@ Dengan begitu, diperoleh nilai _precision_ sebesar **100%**.
         return pd.DataFrame(closest).merge(items).head(k)
       ```
  
-      Function utama yang digunakan untuk menghitung skor `Precision` dari model Content-Based Filtering telah berhasil dibuat.
+Function utama yang digunakan untuk menghitung skor `Precision` dari model Content-Based Filtering telah berhasil dibuat.
 
-      Berdasarkan hasil rekomendasi tempat wisata dengan pendekatan _content-based filtering_ dapat dilihat bahwa hasil yang diberikan oleh sistem rekomendasi berdasarkan tempat wisata **Pantai Parangtritis** dengan kategori **Bahari**, menghasilkan 5 rekomendasi judul tempat wisata yang tepat. Tetapi secara keseluruhan sistem merekomendasikan tempat wisata dengan tepat.    
+Berdasarkan hasil rekomendasi tempat wisata dengan pendekatan _content-based filtering_ dapat dilihat bahwa hasil yang diberikan oleh sistem rekomendasi berdasarkan tempat wisata **Pantai Parangtritis** dengan kategori **Bahari**, menghasilkan 5 rekomendasi judul tempat wisata yang tepat. Tetapi secara keseluruhan sistem merekomendasikan tempat wisata dengan tepat.    
 
     
 - `Colaborative Filtering` : `Root Mean Squared Error`
@@ -426,3 +426,18 @@ y_i = nilai yang sebenarnya
 
 y_pred_i = nilai prediksi terhadap i
 
+- **Cara Kerja**
+      
+      RMSE menghitung akar kuadrat dari rata-rata perbedaan kuadrat antara nilai yang diprediksi oleh model dan nilai sebenarnya. Proses kerjanya melibatkan beberapa langkah. Pertama, untuk setiap titik data, kita menghitung selisih antara prediksi model dan nilai aktual. Selisih ini kemudian dikuadratkan untuk menghilangkan nilai negatif dan memberikan bobot lebih pada kesalahan yang lebih besar. Setelah itu, kita menghitung rata-rata dari nilai-nilai kuadrat tersebut. Terakhir, kita mengambil akar kuadrat dari rata-rata ini untuk mendapatkan RMSE.
+    
+  - Penjelasan Hasil `Root Mean Squared Error` dari model `Collaborative Learning`
+ 
+      Proses training model berhenti pada epoch ke 9 (epochs 1 dimulai dari nomor 0 pada plot) karena `callbacks` yang berisi `early stopper`. `early stopper` menghentikan proses training karena model tidak menunjukkan penurunan yang lebih keci dari `val_root_mean_squared_error` pada epochs ke-9 selama 5 epochs berturut-turut.
+
+      Kemudian, model pada epochs ke 9 yang dipertahankan karena pada epochs tersebut model memiliki performa yang terbaik. Berikut adalah hasil dari metriks pada epocs tersebut:
+      - `loss` : 0.6882
+      - `root_mean_squared_error` : 0.3424
+      - `val_loss` : 0.6931
+      - `val_root_mean_squared_error` : 0.3493
+     
+      **Model dapat memberikan rekomendasi secara Collaborative Filtering dengan cukup baik.**
