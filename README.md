@@ -415,3 +415,10 @@ Di mana:
 
    ![gambar_3](https://github.com/user-attachments/assets/8323ec31-9925-41c3-95a7-1a1f08210a3f)
 
+Dimana:
+
+n = jumlah dataset
+i = urutan data dalam dataset
+y_i = nilai yang sebenarnya
+y_pred_i = nilai prediksi terhadap i
+
