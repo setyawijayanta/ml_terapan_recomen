@@ -372,6 +372,7 @@ Berikut ini adalah penjelasan mengenai setiap metrik beserta hasil perhitungan m
     - **Formula**
 
        ![gambar_2](https://github.com/user-attachments/assets/fc8d32e3-a801-488d-b6a0-3f66c2907a5c)
+
 _rumus menggunakan gambar karena terdapat kendala dalam menggunakan latex formula_
 
 Di mana:
