@@ -382,14 +382,14 @@ Di mana:
       FP = False Positive (rekomendasi yang tidak sesuai)
 
 
-    - **Cara Kerja**
+- **Cara Kerja**
 
-    precision = 5/(5+0) = 100 %
+  precision = 5/(5+0) = 100 %
 
-    Dengan begitu, diperoleh nilai _precision_ sebesar **100%**.
+Dengan begitu, diperoleh nilai _precision_ sebesar **100%**.
       
-    - Penjelasan Hasil `Precision` dari model `Content-Based Learning`
-    - Fungsi dari `calculate_precision` digunakan untuk perhitungan Presisi berdasarkan formula Presisi
+- Penjelasan Hasil `Precision` dari model `Content-Based Learning`
+- Fungsi dari `calculate_precision` digunakan untuk perhitungan Presisi berdasarkan formula Presisi
  
       ```python
       # Calculate precision
