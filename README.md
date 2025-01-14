@@ -370,4 +370,5 @@ Berikut ini adalah penjelasan mengenai setiap metrik beserta hasil perhitungan m
     Berikut adalah formula dan cara kerja dari `Precision` :
     
     - **Formula**
-      ![gambar_2](https://github.com/user-attachments/assets/fc8d32e3-a801-488d-b6a0-3f66c2907a5c)
+
+       ![gambar_2](https://github.com/user-attachments/assets/fc8d32e3-a801-488d-b6a0-3f66c2907a5c)
